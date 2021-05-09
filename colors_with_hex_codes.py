@@ -1564,5 +1564,5 @@ names:{
 "FFFF99": "Pale Canary",
 "FFFFB4": "Portafino",
 "FFFFF0": "Ivory",
-"FFFFFF": "White
+"FFFFFF": "White"
   }
