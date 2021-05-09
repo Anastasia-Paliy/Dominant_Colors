@@ -20,4 +20,4 @@ def support():
     return render_template('support.html')
 
 if __name__ == "__main__":
-    site.run(debug=True)
+    site.run(debug=False)
