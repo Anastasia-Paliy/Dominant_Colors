@@ -28,6 +28,9 @@ def starting():
     return render_template('starting.html')
 
 
+@site.route('/result')
+def result():
+    return render_template('result.html')
 
 
 if __name__ == "__main__":
