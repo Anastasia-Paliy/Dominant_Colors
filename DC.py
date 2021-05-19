@@ -93,5 +93,5 @@ def getDC(im, imwidth, imheight):
         c5 = move_centroid(c5, cl5)
         print(' ')
     cls = [(c1, len(cl1)), (c2, len(cl2)), (c3, len(cl3)), (c4, len(cl4)), (c5, len(cl5))]
-    cls.sort(key = lambda param: param[1])
+    cls.sort(key = lambda param: -param[1])
     return cls

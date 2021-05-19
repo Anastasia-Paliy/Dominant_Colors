@@ -46,10 +46,18 @@ class Window:
         frequencies = [point/total for point in points]
         print(frequencies)
         k = 5
-        a = self.imheight//k
+        a = self.imheight
+        b = self.imwidth//k
+        y = [0]
+        s = 0
+        for i in range(k):
+            s = round(s + frequencies[i], 3)
+            y.append(s)
+        print(y)
         for i in range(k-1):
-            self.c.create_rectangle(0,1 + i*a, self.imwidth//5, (i+1)*a, outline = 'white', fill = get_color(centroids[4-i]))
-        self.c.create_rectangle(0,1 + 4*a, self.imwidth//5, 5*a + (self.imheight-5*a), outline = 'white', fill = get_color(centroids[0]))
+            self.c.create_rectangle(0,1 + a*y[i], b, a*y[i+1], outline = 'white', fill = get_color(centroids[i]))
+        self.c.create_rectangle(0,1 + a*y[k-1], b, self.imheight, outline = 'white', fill = get_color(centroids[k-1]))
+
         
     def get_result(self):
         self.im = Image.open(get_filename(choose_file()))
