@@ -21,28 +21,29 @@ def init_centroid(im, imheight, imwidth):
 
     for (r, g, b) in im.getdata():
         if (r, g, b) not in cs:
-            if g<c3[1]:
+            if g < c3[1]:
                 c3 = (r, g, b)
     cs.add(c3)
     
     for (r, g, b) in im.getdata():
         if (r, g, b) not in cs:
-            if g>c4[1]:
+            if g > c4[1]:
                 c4 = (r, g, b)
     cs.add(c4)
     
     for (r, g, b) in im.getdata():
         if (r, g, b) not in cs:
-            if b<c5[2]:
+            if b < c5[2]:
                 c5 = (r, g, b)
     cs.add(c5)
-    
+    """
     for (r, g, b) in im.getdata():
         if (r, g, b) not in cs:
-            if b>c6[2]:
+            if b > c6[2]:
                 c6 = (r, g, b)
 
     cs.add(c6)
+    """
     print(cs)
     return(c1, c2, c3, c4, c5)
 

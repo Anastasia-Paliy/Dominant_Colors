@@ -25,9 +25,9 @@ class Window:
         self.button.pack()
         self.state_label = Label(self.fr4, text = "Example")
         self.state_label.pack()
-        self.im = Image.open("start.png")
-        image = ImageTk.PhotoImage(self.im)
-        (self.imwidth, self.imheight) = self.im.size
+        self.img = Image.open("start.png")
+        image = ImageTk.PhotoImage(self.img)
+        (self.imwidth, self.imheight) = self.img.size
         self.image_label = Label(self.fr2, image = image)
         self.image_label.pack()
         self.root.resizable(0,0)
@@ -45,30 +45,37 @@ class Window:
         total = sum(points)
         frequencies = [point/total for point in points]
         print(frequencies)
-        k = 5
-        a = self.imheight
-        b = self.imwidth//k
+        a = self.imgheight
+        b = self.imgwidth//self.k
         y = [0]
         s = 0
-        for i in range(k):
+        for i in range(self.k):
             s = round(s + frequencies[i], 3)
             y.append(s)
         print(y)
-        for i in range(k-1):
+        for i in range(self.k-1):
             self.c.create_rectangle(0,1 + a*y[i], b, a*y[i+1], outline = 'white', fill = get_color(centroids[i]))
-        self.c.create_rectangle(0,1 + a*y[k-1], b, self.imheight, outline = 'white', fill = get_color(centroids[k-1]))
-
+        self.c.create_rectangle(0,1 + a*y[self.k-1], b, a, outline = 'white', fill = get_color(centroids[self.k-1]))
+        for i in range(self.k):
+            print(get_color(centroids[i]))
+        
         
     def get_result(self):
-        self.im = Image.open(get_filename(choose_file()))
+        self.k = 5
+        file = get_filename(choose_file())
+        print(file)
+        self.img = Image.open(file)
         self.state_label.configure(text = "Processing")
         self.root.update()
-        new_image = ImageTk.PhotoImage(self.im)
-        (self.imwidth, self.imheight) = self.im.size
+        new_image = ImageTk.PhotoImage(self.img)
+        (self.imgwidth, self.imgheight) = self.img.size
+        (self.imwidth, self.imheight) = (self.imgwidth//2, self.imgheight//2)
+        self.im = self.img
+        self.im.thumbnail((self.imwidth, self.imheight))
         self.image_label.configure(image = new_image)
         self.image_label.image = new_image
         self.c.destroy()
-        self.c = Canvas(self.fr3, width = self.imwidth//5+2, height = self.imheight)
+        self.c = Canvas(self.fr3, width = self.imgwidth//self.k+2, height = self.imgheight)
         self.c.pack()
         clasters = getDC(self.im, self.imheight, self.imwidth)
         self.state_label.configure(text = "Done")

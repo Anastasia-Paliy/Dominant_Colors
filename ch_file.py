@@ -4,7 +4,8 @@ import string
 import os
 
 
-directory = os.getcwd()
+directory = os.getcwd()+ '\\test_images'
+x = len('\\test_images')
 
 def choose_file():
     file_name = fd.askopenfilename(title = 'Choose file', initialdir = directory)
@@ -15,6 +16,6 @@ def choose_file():
 def get_filename(file):   
     path = os.path.dirname(file)
     l = len(path)
-    filename = file[l+1: ]
+    filename = file[l+1-x: ]
     return filename
 
