@@ -6,13 +6,15 @@ def to16(x):
 
 
 def init_centroid(im, imheight, imwidth):
-    n = imheight*imwidth
+    #n = imheight*imwidth
+    #print(n)
     cs = set()
-    print(n)
     c3, c5 = (256, 256, 256), (256, 256, 256)
     c4, c6 = (-1, -1, -1), (-1, -1, -1)
 
     r = [x for x in im.getdata()]
+    n = len(r)
+    print(n)
     r.sort(key = lambda param: param[0])
     c1 = r[0]
     c2 = r[n-1]
