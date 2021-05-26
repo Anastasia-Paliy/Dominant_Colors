@@ -1,5 +1,5 @@
-from PIL import Image, ImageTk, ImageGrab, EpsImagePlugin, ImageDraw
-from newDC import getDC, to16
+from PIL import Image, ImageDraw
+from DC import getDC, to16
 from ch_file import choose_file, get_filename
 
 
@@ -59,9 +59,8 @@ class Window:
         newImage = Image.new('RGB',(image1_size[0]+image2_size[0], image1_size[1]), (250,250,250))
         newImage.paste(self.photo,(0,0))
         newImage.paste(rects,(image1_size[0],0))
-        newImage.show()
         newImage.save('result.png','png')
 
      
  
-w = Window(get_filename(choose_file()))
+w = Window(image)

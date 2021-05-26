@@ -6,40 +6,38 @@ def to16(x):
 
 
 def init_centroid(im, imheight, imwidth):
-    #n = imheight*imwidth
-    #print(n)
     cs = set()
     c3, c5 = (256, 256, 256), (256, 256, 256)
     c4, c6 = (-1, -1, -1), (-1, -1, -1)
 
-    r = [x for x in im.getdata()]
-    n = len(r)
+    data = list(im.getdata())
+    n = len(data)
     print(n)
-    r.sort(key = lambda param: param[0])
-    c1 = r[0]
-    c2 = r[n-1]
+    data.sort(key = lambda param: param[0])
+    c1 = data[0]
+    c2 = data[n-1]
     cs.add(c1)
     cs.add(c2)
 
-    for (r, g, b) in im.getdata():
+    for (r, g, b) in data:
         if (r, g, b) not in cs:
             if g < c3[1]:
                 c3 = (r, g, b)
     cs.add(c3)
     
-    for (r, g, b) in im.getdata():
+    for (r, g, b) in data:
         if (r, g, b) not in cs:
             if g > c4[1]:
                 c4 = (r, g, b)
     cs.add(c4)
     
-    for (r, g, b) in im.getdata():
+    for (r, g, b) in data:
         if (r, g, b) not in cs:
             if b < c5[2]:
                 c5 = (r, g, b)
     cs.add(c5)
     """
-    for (r, g, b) in im.getdata():
+    for (r, g, b) in data:
         if (r, g, b) not in cs:
             if b > c6[2]:
                 c6 = (r, g, b)
@@ -82,7 +80,7 @@ def move_centroid(c, cl):
     c = (sr//n, sg//n, sb//n)
     return(c)
 
-def getDC(im, imwidth, imheight):
+def getDC(im, imwidth, imheight, k):
     cl1, cl2, cl3, cl4, cl5 = [], [], [], [], []
     status = 'progress'
     c1, c2, c3, c4, c5 = init_centroid(im, imheight, imwidth)
