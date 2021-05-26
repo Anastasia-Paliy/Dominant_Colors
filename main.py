@@ -1,6 +1,3 @@
-from tkinter import Tk, Frame, Button, Label, Image, Canvas, LEFT
-
-from PIL import ImageTk
 from flask import Flask, render_template, request, make_response
 
 site = Flask(__name__)
@@ -26,22 +23,14 @@ def support():
     return render_template('support.html')
 
 
-@site.route('/starting', methods=['POST', 'GET'])
+@site.route('/starting')
 def starting():
-    if request.method == 'POST':
-        image = request.form['uploadfile']
-    else:
-        return render_template('starting.html')
+    return render_template('starting.html')
 
 
 @site.route('/result')
 def result():
     return render_template('result.html')
-
-
-@site.route('/')
-def http_404_handler():
-    return make_response("<h2>404 Error</h2>", 400)
 
 
 if __name__ == "__main__":
