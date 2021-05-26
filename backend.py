@@ -1,6 +1,5 @@
 from PIL import Image, ImageDraw
 from DC import getDC, to16
-from ch_file import choose_file, get_filename
 
 
 def get_color(c):
@@ -57,4 +56,4 @@ class Window:
         self.result = open('result.png')
      
  
-w = Window("im1.jpg")
+w = Window(image)
