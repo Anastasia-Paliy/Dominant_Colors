@@ -54,7 +54,7 @@ class Window:
         newImage.paste(self.photo,(0,0))
         newImage.paste(rects,(image1_size[0],0))
         newImage.save('result.png','png')
-
+        self.result = open('result.png')
      
  
-w = Window(image)
+w = Window("im1.jpg")

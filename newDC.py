@@ -29,7 +29,7 @@ def init_centroid(data, imheight, imwidth):
     n = len(data)
     print(n)
     
-    for i in range(3):
+    for i in range(2):
         for point in data:
             if point not in centroids:
                 if point[i] < max_value[i][i]:
@@ -43,9 +43,23 @@ def init_centroid(data, imheight, imwidth):
                     min_value[i] = point
         if min_value[i] != (-1, -1, -1):
             centroids.add(min_value[i])
+
+    for i in range(2, 3):
+        for point in data:
+            if point not in centroids:
+                if point[i] < max_value[i][i]:
+                    max_value[i] = point
+        if max_value[i] != (256, 256, 256):
+            centroids.add(max_value[i])        
     
+            
+    centroids = list(centroids)
     print(centroids)
-    return(list(centroids), len(centroids))
+    k = len(centroids)
+    if k == 6:
+        centroids = centroids[:5]
+        k = 5
+    return(centroids, k)
 
 
 def get_clasters(data, centroids, clasters, status):
