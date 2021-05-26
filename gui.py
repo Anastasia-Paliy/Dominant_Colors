@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from ch_file import choose_file, get_filename
-from DC import getDC, to16
+from newDC import getDC, to16
 
 def get_color(c):
     color = '#'+to16(c[0])+to16(c[1])+to16(c[2])
@@ -61,7 +61,6 @@ class Window:
         
         
     def get_result(self):
-        self.k = 5
         file = get_filename(choose_file())
         print(file)
         self.img = Image.open(file)
@@ -69,15 +68,15 @@ class Window:
         self.root.update()
         new_image = ImageTk.PhotoImage(self.img)
         (self.imgwidth, self.imgheight) = self.img.size
-        (self.imwidth, self.imheight) = (self.imgwidth//2, self.imgheight//2)
+        (self.imwidth, self.imheight) = (self.imgwidth//10, self.imgheight//10)
         self.im = self.img
         self.im.thumbnail((self.imwidth, self.imheight))
         self.image_label.configure(image = new_image)
         self.image_label.image = new_image
+        clasters, self.k = getDC(self.im, self.imheight, self.imwidth)
         self.c.destroy()
         self.c = Canvas(self.fr3, width = self.imgwidth//self.k+2, height = self.imgheight)
         self.c.pack()
-        clasters = getDC(self.im, self.imheight, self.imwidth)
         self.state_label.configure(text = "Done")
         self.create_rectangles(clasters)
         self.root.update()

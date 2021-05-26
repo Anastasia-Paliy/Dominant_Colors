@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from newDC import getDC, to16
+from DC import getDC, to16
 from ch_file import choose_file, get_filename
 
 
@@ -18,7 +18,7 @@ class Window:
         self.im.thumbnail((self.imwidth, self.imheight))
         
         clasters, self.k = getDC(self.im, self.imheight, self.imwidth)
-        #self.k = min(5, self.k)       
+        self.k = min(5, self.k)       
         self.draw_rectangles(clasters)
         self.get_image()
         
@@ -32,17 +32,13 @@ class Window:
         
         centroids = [x[0] for x in clasters]
         points = [x[1] for x in clasters]
-        print(centroids)
-        print(points)
         total = sum(points)
         frequencies = [point/total for point in points]
-        print(frequencies)
         y = [0]
         s = 0
         for i in range(self.k):
             s = round(s + frequencies[i], 3)
             y.append(s)
-        print(y)
         
         for i in range(self.k-1):
             draw.rectangle((0, a*y[i], b-1, a*y[i+1]), fill = get_color(centroids[i]), outline = (255, 255, 255))
