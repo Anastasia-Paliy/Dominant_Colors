@@ -1,13 +1,13 @@
-from tkinter import *
+import tkinter
 from tkinter import filedialog as fd
-import string
 import os
-
 
 directory = os.getcwd()+ '\\test_images'
 x = len('\\test_images')
 
 def choose_file():
+    root = tkinter.Tk()
+    root.withdraw()
     file_name = fd.askopenfilename(title = 'Choose file', initialdir = directory)
     if file_name:
         return file_name

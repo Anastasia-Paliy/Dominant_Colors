@@ -1,5 +1,6 @@
 from PIL import Image, ImageTk, ImageGrab, EpsImagePlugin, ImageDraw
 from DC import getDC, to16
+from ch_file import choose_file, get_filename
 
 
 def get_color(c):
@@ -63,4 +64,4 @@ class Window:
 
      
  
-w = Window("im1.jpg")
+w = Window(get_filename(choose_file()))
