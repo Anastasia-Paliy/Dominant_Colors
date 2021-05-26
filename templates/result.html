@@ -7,5 +7,10 @@
 {% block body %}
 <div class="container">
     <h1>Result</h1>
+    <img
+           src="{{ url_for('static', filename=filename) }}"
+           alt="Current image"
+    />
+
 </div>
 {% endblock %}

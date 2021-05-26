@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request
+from DC import Window
 
 site = Flask(__name__)
 
@@ -23,14 +24,17 @@ def support():
     return render_template('support.html')
 
 
-@site.route('/starting')
+@site.route('/starting', methods=['GET'])
 def starting():
     return render_template('starting.html')
 
 
-@site.route('/result')
+@site.route('/result', methods=['POST'])
 def result():
-    return render_template('result.html')
+    img = request.files['uploadfile']
+    filename = img.filename.rsplit('.', 1)[0]
+    Window(img, site.root_path, filename)
+    return render_template('result.html', filename=filename)
 
 
 if __name__ == "__main__":

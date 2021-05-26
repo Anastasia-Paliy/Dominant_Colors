@@ -7,9 +7,9 @@
 {% block body %}
 <div class="container">
     <h1>Find dominant colors</h1>
-    <form action="/result" method="post">
-        <input type="file" name="uploadfile" size="5" class="form-control" style="font-size:14px; height:40px; width:100%;"><br>
-        <button type="submit" class="btn btn-outline-light" style="background-color: #C19DF0; width:250px; height:40px; font-size:20px; ">Get DC</button>
+    <form action={{ url_for("result") }} enctype="multipart/form-data" method="post">
+        <input type="file" name="uploadfile" id="uploadfile" size="5" class="form-control" style="font-size:14px; height:40px; width:100%;"><br>
+        <input type="submit" value="Get DC" class="btn btn-outline-light" style="background-color: #C19DF0; width:250px; height:40px; font-size:20px;">
     </form>
     <span class="font-italic font-size-14px">Wait a little bit and you will get the beauty!</span>
 </div>
