@@ -16,11 +16,9 @@ class Window:
         (self.imwidth, self.imheight) = (self.imgwidth//10, self.imgheight//10)
         self.im = self.img
         self.im.thumbnail((self.imwidth, self.imheight))
-        
-        self.k = 5
 
-        clasters = getDC(self.im, self.imheight, self.imwidth, self.k)
-        
+        clasters, self.k = getDC(self.im, self.imheight, self.imwidth)
+        #self.k = min(5, self.k)
         self.draw_rectangles(clasters)
         self.get_image()
         

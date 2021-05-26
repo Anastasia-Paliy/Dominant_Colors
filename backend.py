@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from DC import getDC, to16
+from newDC import getDC, to16
 from ch_file import choose_file, get_filename
 
 
@@ -17,10 +17,8 @@ class Window:
         self.im = self.img
         self.im.thumbnail((self.imwidth, self.imheight))
         
-        self.k = 5
-
-        clasters = getDC(self.im, self.imheight, self.imwidth, self.k)
-        
+        clasters, self.k = getDC(self.im, self.imheight, self.imwidth)
+        #self.k = min(5, self.k)       
         self.draw_rectangles(clasters)
         self.get_image()
         

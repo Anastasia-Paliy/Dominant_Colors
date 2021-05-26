@@ -21,7 +21,7 @@ def move_centroid(c, cl):
 
 
 
-def init_centroid(data, imheight, imwidth, k):
+def init_centroid(data, imheight, imwidth):
     centroids = set()
     max_value = [(256, 256, 256) for x in range(3)]
     min_value = [(-1, -1, -1) for x in range(3)]
@@ -45,24 +45,24 @@ def init_centroid(data, imheight, imwidth, k):
             centroids.add(min_value[i])
     
     print(centroids)
-    return(list(centroids), k)
+    return(list(centroids), len(centroids))
 
 
 def get_clasters(data, centroids, clasters, status):
     k = len(centroids)
     new_clasters = [[] for x in range(k)]
-    for i in range(k):
-        for (r, g, b) in data:
-            min_distance = (1000000, 0)
-            for centroid in centroids:
-                distance = (get_distance(r, g, b, centroid), i)
-                if distance[0] < min_distance[0]:
-                    min_distance = distance
-            new_clasters[min_distance[1]].append((r, g, b))
-
+    
+    for (r, g, b) in data:
+        min_distance = (100000000, 0)
+        for i in range(k):
+            distance = (get_distance(r, g, b, centroids[i]), i)
+            if distance[0] < min_distance[0]:
+                min_distance = distance
+        new_clasters[min_distance[1]].append((r, g, b))
+    
     mark = True
     for i in range(k):
-        mark = mark and new_clasters[i] == clasters[i]
+        mark = mark and (new_clasters[i] == clasters[i])
     if mark:
         status = 'done'
     for claster in new_clasters:
@@ -71,17 +71,17 @@ def get_clasters(data, centroids, clasters, status):
 
 
 
-def getDC(im, imwidth, imheight, k):
+def getDC(im, imwidth, imheight):
     data = list(im.getdata())
-    clasters = [[] for x in range(k)]
+    clasters = [[] for x in range(6)]
     status = 'progress'
-    centroids, k = init_centroid(data, imheight, imwidth, k)
+    centroids, k = init_centroid(data, imheight, imwidth)
     while status == 'progress':
         clasters, status = get_clasters(data, centroids, clasters, status)
         for i in range(k):
             centroids[i] = move_centroid(centroids[i], clasters[i])
         print(' ')
         
-    clasters = [(claster, len(claster)) for claster in clasters]
-    clasters.sort(key = lambda param: -param[1])
-    return clasters
+    new_clasters = [(centroids[i], len(clasters[i])) for i in range(k)]
+    new_clasters.sort(key = lambda param: -param[1])
+    return new_clasters, k
