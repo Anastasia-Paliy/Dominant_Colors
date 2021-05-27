@@ -2,3 +2,5 @@ gunicorn
 flask~=1.1.2
 
 werkzeug~=1.0.1
+pillow~=8.0.1
+future~=0.18.2
