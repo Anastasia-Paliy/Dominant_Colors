@@ -35,7 +35,7 @@ def init_centroid(data, imheight, imwidth):
 
     n = len(data)
 
-    for i in range(2):
+    for i in range(3):
         for point in data:
             if point not in centroids:
                 if point[i] < max_value[i][i]:
@@ -49,14 +49,6 @@ def init_centroid(data, imheight, imwidth):
                     min_value[i] = point
         if min_value[i] != (-1, -1, -1):
             centroids.add(min_value[i])
-
-    for i in range(2, 3):
-        for point in data:
-            if point not in centroids:
-                if point[i] < max_value[i][i]:
-                    max_value[i] = point
-        if max_value[i] != (256, 256, 256):
-            centroids.add(max_value[i])
 
     return (list(centroids), len(centroids))
 
