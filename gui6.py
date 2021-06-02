@@ -23,7 +23,7 @@ class Window:
         self.fr2.pack(side = LEFT)
         self.button = Button(self.fr1, text = "Choose image", command = lambda: self.get_result())
         self.button.pack()
-        self.state_label = Label(self.fr4, text = "Example")
+        self.state_label = Label(self.fr4, text = "Upload your image")
         self.state_label.pack()
         self.img = Image.open("start.png")
         image = ImageTk.PhotoImage(self.img)
