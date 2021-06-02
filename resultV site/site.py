@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from DC import Window
+from functions import allowed_file
 
 site = Flask(__name__)
 
