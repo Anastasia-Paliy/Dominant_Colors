@@ -1,4 +1,4 @@
-from PIL import Image, ImageTk, ImageGrab, EpsImagePlugin, ImageDraw
+from PIL import Image, ImageDraw
 from newDC6 import getDC, to16
 from ch_file import choose_file, get_filename
 
