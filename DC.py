@@ -52,4 +52,4 @@ class Window:
         newImage = Image.new('RGB', (image1_size[0] + image2_size[0], image1_size[1]), (250, 250, 250))
         newImage.paste(self.photo, (0, 0))
         newImage.paste(rects, (image1_size[0], 0))
-        newImage.save(self.save_path, 'JPEG', quality=70)
+        newImage.save(self.save_path, 'JPEG', quality=100)

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from DC import Window
+from functions import allowed_file
 
 site = Flask(__name__)
 
@@ -32,10 +33,16 @@ def starting():
 @site.route('/result', methods=['POST'])
 def result():
     img = request.files['uploadfile']
-    filename = img.filename.rsplit('.', 1)[0]
-    Window(img, site.root_path, filename)
-    return render_template('result.html', filename=filename)
+    filename = img.filename.rsplit('.', 1)
+    try:
+        if allowed_file(filename):
+            Window(img, site.root_path, filename[0])
+            return render_template('result.html', filename=filename[0])
+        else:
+            return render_template('error.html')
+    except IndexError:
+        return render_template('starting.html')
 
 
 if __name__ == "__main__":
-    site.run(debug=True)
+    site.run()
